@@ -1,13 +1,12 @@
 package com.datasource.server.common.config;
 
+import com.datasource.server.common.pojo.T_Datascore_Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DatasourceSwitch {
-	
-	@Autowired
-    EcasEnvInfoPo ecasEnvInfoPo;
+
 	@Autowired
     protected DataSourceManager dataSourceManager;
 
@@ -16,9 +15,10 @@ public class DatasourceSwitch {
 	 * void
 	*/
 	public void switchToConfigurationDataSource() {
-		dataSourceManager.addDataSource(ecasEnvInfoPo);
+		T_Datascore_Config t_datascore_config = new T_Datascore_Config();
+		dataSourceManager.addDataSource(t_datascore_config);
 		System.out.println("切换新的数据源=============>");
-        DynamicCustomerContextHolder.setContextKey(ecasEnvInfoPo.getEnvNo());
+        DynamicCustomerContextHolder.setContextKey(t_datascore_config.getType()+t_datascore_config.getId());
 	}
 
 	/**
@@ -27,7 +27,8 @@ public class DatasourceSwitch {
 	 * void
 	*/
 	public void switchToSpecifiedDataSource(EcasEnvInfoPo evnInfo) {
-		dataSourceManager.addDataSource(evnInfo);
+		T_Datascore_Config t_datascore_config = new T_Datascore_Config();
+		dataSourceManager.addDataSource(t_datascore_config);
         DynamicCustomerContextHolder.setContextKey(evnInfo.getEnvNo());
 	}
 	
@@ -37,6 +38,14 @@ public class DatasourceSwitch {
 	*/
 	public void switchToDefaultDataSource() {
 		DynamicCustomerContextHolder.remove();
+	}
+
+	/**
+	 * 根据
+	 * @param key
+	 */
+	public void  switchDataSourceByKey(String key){
+		DynamicCustomerContextHolder.setContextKey(key);
 	}
 
 }

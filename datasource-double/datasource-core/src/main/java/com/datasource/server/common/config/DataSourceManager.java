@@ -1,6 +1,7 @@
 package com.datasource.server.common.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.datasource.server.common.pojo.T_Datascore_Config;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -48,28 +49,28 @@ public class DataSourceManager implements InitializingBean {
      * @param data
      * @return
      */
-    public DataSource initDataSource(EcasEnvInfoPo data) {
+    public DataSource initDataSource(T_Datascore_Config data) {
         //todo  需要添加更多参数,直接使用配置文件中配置还是在页面配置？
-        if (StringUtils.isAnyBlank(data.getDatasourceAddress(), data.getDatasourceUserName(),
-                data.getDatasourcePassword())) {
+        if (StringUtils.isAnyBlank(data.getUrl(), data.getUserName(),
+                data.getPassword())) {
 
         }
         // 需要校验连接是否可用。
 //        DataSourceUrlUtils.testUrl(data.getDatasourceType(),data.getDatasourceAddress(),data.getDatasourceUserName(),data.getDatasourcePassword(),data.getDatasourceDriver());
         DruidDataSource druidDataSource = new DruidDataSource();
-        druidDataSource.setUrl(DataSourceUrlUtils.getUrl(data.getDatasourceType(), data.getDatasourceAddress()));
-        druidDataSource.setUsername(data.getDatasourceUserName());
-        druidDataSource.setPassword(data.getDatasourcePassword());
-        String driver = data.getDatasourceDriver();
+        druidDataSource.setUrl(DataSourceUrlUtils.getUrl(data.getType(), data.getUrl()));
+        druidDataSource.setUsername(data.getUserName());
+        druidDataSource.setPassword(data.getPassword());
+        String driver = data.getDriver();
         if(StringUtils.isBlank(driver)){
-            driver = DataSourceEnum.getEnum(data.getDatasourceType()).getDriverClass();
+            driver = DataSourceEnum.getEnum(data.getType()).getDriverClass();
         }
         druidDataSource.setDriverClassName(driver);
         return druidDataSource;
     }
 
 
-    public void addDataSource(EcasEnvInfoPo data) {
-        dynamicDataSource.addDataSource(data.getEnvNo(), initDataSource(data));
+    public void addDataSource(T_Datascore_Config data) {
+        dynamicDataSource.addDataSource(data.getType()+data.getId(), initDataSource(data));
     }
 }

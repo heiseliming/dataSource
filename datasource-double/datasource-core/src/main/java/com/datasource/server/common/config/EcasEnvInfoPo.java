@@ -3,7 +3,6 @@ package com.datasource.server.common.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component
 public class EcasEnvInfoPo {
 	
 	private static final long serialVersionUID = 1L;
@@ -11,33 +10,27 @@ public class EcasEnvInfoPo {
 
 	/**
      * envNo       db_column: ENV_NO 
-     */ 	
-	@Value("${db.dynamic.envNo:null}")
+     */
 	private String envNo;
     /**
      * datasourceAddress       db_column: DATASOURCE_ADDRESS 
-     */ 
-	@Value("${db.dynamic.datasourceAddress:null}")
+     */
 	private String datasourceAddress;
     /**
      * datasourceType       db_column: DATASOURCE_TYPE 
-     */ 	
-	@Value("${db.dynamic.datasourceType:null}")
+     */
 	private String datasourceType;
     /**
      * datasourceDriver       db_column: DATASOURCE_DRIVER 
-     */ 	
-	@Value("${db.dynamic.datasourceDriver:null}")
+     */
 	private String datasourceDriver;
     /**
      * datasourceUserName       db_column: DATASOURCE_USER_NAME 
-     */ 	
-	@Value("${db.dynamic.datasourceUserName:null}")
+     */
 	private String datasourceUserName;
     /**
      * datasourcePassword       db_column: DATASOURCE_PASSWORD 
-     */ 	
-	@Value("${db.dynamic.datasourcePassword:null}")
+     */
 	private String datasourcePassword;
 
 	

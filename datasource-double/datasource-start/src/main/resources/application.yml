@@ -1,17 +1,13 @@
 server:
   port: 8888
-
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  configLocation: classpath:config/mybatis-config.xml
 db:
   #默认数据源
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/config_server_dev?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Hongkong&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://127.0.0.1:3306/stpnewtest?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Hongkong&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: 123456
     driverClassName: com.mysql.cj.jdbc.Driver
-  #切换的数据源
-  dynamic:
-    datasourceAddress: jdbc:oracle:thin:@127.0.0.1:1521:orcl
-    datasourceType: oracle
-    datasourceDriver: oracle.jdbc.driver.OracleDriver
-    datasourceUserName: yangxd
-    datasourcePassword: 12345678
+
